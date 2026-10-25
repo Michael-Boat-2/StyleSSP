@@ -34,7 +34,7 @@ def sample_coco(n, seed, out_dir, cache_dir):
 
 
 # can exclude genres if needed 
-EXCLUDED_GENRES = {}
+EXCLUDED_GENRES = {"nude_painting"}
 
 def sample_wikiart(m, seed, out_dir, buffer_size=2000):
     ds = load_dataset("huggan/wikiart", split="train", streaming=True)
