@@ -1,0 +1,127 @@
+{
+  "seed": 2026,
+  "content": [
+    {
+      "file": "c00.jpg",
+      "coco_id": 127476,
+      "license": 4,
+      "url": "http://images.cocodataset.org/val2017/000000127476.jpg"
+    },
+    {
+      "file": "c01.jpg",
+      "coco_id": 325527,
+      "license": 4,
+      "url": "http://images.cocodataset.org/val2017/000000325527.jpg"
+    },
+    {
+      "file": "c02.jpg",
+      "coco_id": 521719,
+      "license": 3,
+      "url": "http://images.cocodataset.org/val2017/000000521719.jpg"
+    },
+    {
+      "file": "c03.jpg",
+      "coco_id": 530052,
+      "license": 5,
+      "url": "http://images.cocodataset.org/val2017/000000530052.jpg"
+    },
+    {
+      "file": "c04.jpg",
+      "coco_id": 110211,
+      "license": 4,
+      "url": "http://images.cocodataset.org/val2017/000000110211.jpg"
+    },
+    {
+      "file": "c05.jpg",
+      "coco_id": 227511,
+      "license": 4,
+      "url": "http://images.cocodataset.org/val2017/000000227511.jpg"
+    },
+    {
+      "file": "c06.jpg",
+      "coco_id": 574810,
+      "license": 1,
+      "url": "http://images.cocodataset.org/val2017/000000574810.jpg"
+    },
+    {
+      "file": "c07.jpg",
+      "coco_id": 434479,
+      "license": 4,
+      "url": "http://images.cocodataset.org/val2017/000000434479.jpg"
+    },
+    {
+      "file": "c08.jpg",
+      "coco_id": 565597,
+      "license": 2,
+      "url": "http://images.cocodataset.org/val2017/000000565597.jpg"
+    },
+    {
+      "file": "c09.jpg",
+      "coco_id": 509656,
+      "license": 1,
+      "url": "http://images.cocodataset.org/val2017/000000509656.jpg"
+    }
+  ],
+  "style": [
+    {
+      "file": "s00.jpg",
+      "artist": "joseph-wright",
+      "style": "Romanticism",
+      "genre": "landscape"
+    },
+    {
+      "file": "s01.jpg",
+      "artist": "pierre-auguste-renoir",
+      "style": "Impressionism",
+      "genre": "portrait"
+    },
+    {
+      "file": "s02.jpg",
+      "artist": "paul-cezanne",
+      "style": "Romanticism",
+      "genre": "portrait"
+    },
+    {
+      "file": "s03.jpg",
+      "artist": "odilon-redon",
+      "style": "Symbolism",
+      "genre": "religious_painting"
+    },
+    {
+      "file": "s04.jpg",
+      "artist": "rembrandt",
+      "style": "Baroque",
+      "genre": "Unknown Genre"
+    },
+    {
+      "file": "s05.jpg",
+      "artist": "ivan-shishkin",
+      "style": "Realism",
+      "genre": "landscape"
+    },
+    {
+      "file": "s06.jpg",
+      "artist": "paul-cezanne",
+      "style": "Impressionism",
+      "genre": "landscape"
+    },
+    {
+      "file": "s07.jpg",
+      "artist": "rembrandt",
+      "style": "Baroque",
+      "genre": "Unknown Genre"
+    },
+    {
+      "file": "s08.jpg",
+      "artist": "Unknown Artist",
+      "style": "New_Realism",
+      "genre": "genre_painting"
+    },
+    {
+      "file": "s09.jpg",
+      "artist": "rembrandt",
+      "style": "Baroque",
+      "genre": "portrait"
+    }
+  ]
+}
