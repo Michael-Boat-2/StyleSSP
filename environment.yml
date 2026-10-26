@@ -1,0 +1,11 @@
+name: stylessp-repro
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - -r requirements.txt          # the authors' pinned list (torch 2.3.0, diffusers 0.30.0, transformers 4.44.0, ...)
+      - setuptools==69.5.1           # needed by xformers/triton at import time
+      - datasets==2.21.0             # used by repro/sample_data.py (WikiArt streaming)
+      - git+https://github.com/openai/CLIP.git
