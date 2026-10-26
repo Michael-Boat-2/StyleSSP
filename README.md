@@ -39,7 +39,7 @@ what already exists in `--work`, so a re-run only redoes missing work.
 | `repro/run_all.py` | The one command |
 | `repro/setup_colab.ipynb` | Colab environment and checkpoint setup |
 
-No files from the original repository were modified.
+No code files from the original repository were modified. Original README and environment file were renamed, however.
 
 ## Deviations from the paper's setup
 100 pairs (paper: 800), 10 distinct styles (paper: 40), two seeds (1234, 42). The released code
