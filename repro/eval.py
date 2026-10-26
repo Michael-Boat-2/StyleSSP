@@ -3,7 +3,7 @@ import argparse, csv, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVAL_DIR = os.path.join(ROOT, "evaluation")
-CONFIGS = ["baseline", "fm", "ng", "full"]
+CONFIGS = ["baseline", "fm", "ng", "full","fm_paper"]
 PAIR_RE = re.compile(r"^(c\d+)_(s\d+)\.png$")
 
 

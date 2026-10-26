@@ -12,6 +12,7 @@ CONFIGS = {
     "fm":       {"ng": False, "fm": True},
     "ng":       {"ng": True,  "fm": False},
     "full":     {"ng": True,  "fm": True},
+    "fm_paper": {"ng": False, "fm": "paper"},   # paper-faithful FM (repro/fm_paper.py)
 }
 
 def parse_args():
@@ -22,6 +23,8 @@ def parse_args():
     p.add_argument("--n_content", type=int, default=None, help="use only the first N content images")
     p.add_argument("--n_style", type=int, default=None, help="use only the first N style images")
     p.add_argument("--phase", choices=["invert", "sample", "both"], default="both")
+    p.add_argument("--configs", nargs="+", default=["baseline", "fm", "ng", "full"],
+                   help="which configs to sample")
     return p.parse_args()
 
 def get_pairs(data_dir, n_content, n_style):
@@ -130,6 +133,7 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
     from pipeline_controlnet_inpaint_sd_xl import StableDiffusionXLControlNetInpaintPipeline
 
     cfg = RunConfig(seed=args.seed)
+    configs = {c: CONFIGS[c] for c in args.configs}
     res, dev, dt = cfg.resolution, cfg.device, torch.float16
 
     def out_path(config, name):
@@ -182,8 +186,11 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
             t0 = time.time()
             inv_latent = saved["ng" if sw["ng"] else "no_ng"].to(dev)
 
-            if sw["fm"]:
-                torch.manual_seed(args.seed)   # freq_exp's noise is unseeded in the authors' code
+            if sw["fm"] == "paper":
+                from fm_paper import freq_paper
+                start = freq_paper(inv_latent, alpha=0.7, cutoff=0.3, noise_sigma=0.3, seed=args.seed)
+            elif sw["fm"]:
+                torch.manual_seed(args.seed)
                 _, latent_l, _ = freq_exp(inv_latent, d_s=0.3, d_t=0.9, alpha=0.7, filter_type="gaussian_b")
                 start = latent_l.to(inv_latent.dtype)
             else:
