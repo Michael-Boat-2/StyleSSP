@@ -42,7 +42,7 @@ def make_table(by_cfg, out_path):
     print("\n".join(lines))
 
 
-GRID_PAIRS = ["c01_s01", "c02_s02","c06_s06", "c09_s09"]   # fixed rule: the diagonal, chosen before inspection
+GRID_PAIRS = ["c00_s00", "c01_s01","c02_s02", "c03_s03"]   # diagonal pairs chosen
 
 def make_grid(runs, data, seed, out_path, size=256):
     cols = ["content", "style"] + [c for c in ORDER if os.path.isdir(os.path.join(runs, f"seed{seed}", "images", c))]

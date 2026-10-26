@@ -140,11 +140,11 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
         return os.path.join(img_dir, config, name + ".png")
 
     todo = [p for p in pairs
-            if not all(os.path.exists(out_path(c, pair_name(*p))) for c in CONFIGS)]
+            if not all(os.path.exists(out_path(c, pair_name(*p))) for c in configs)]
     print(f"Phase B: {len(todo)} of {len(pairs)} pairs still to sample")
     if not todo:
         return
-    for c in CONFIGS:
+    for c in configs:
         os.makedirs(os.path.join(img_dir, c), exist_ok=True)
 
 
@@ -180,7 +180,7 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
         style = Image.open(os.path.join(args.data, "style", style_file)).convert("RGB").resize((res, res))
         canny = get_canny_map(np.array(cv2.imread(content_path))).resize((res, res))
 
-        for config, sw in CONFIGS.items():
+        for config, sw in configs.items():
             if os.path.exists(out_path(config, name)):
                 continue
             t0 = time.time()

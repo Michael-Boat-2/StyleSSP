@@ -9,9 +9,8 @@ __pycache__/
 # Checkpoints
 checkpoints/
 
-# Results
-results/
+# Data
 repro/data/content
-repro/data/stlye
+repro/data/style
 repro/data/cache
 
