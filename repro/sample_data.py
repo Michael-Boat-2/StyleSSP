@@ -72,6 +72,10 @@ def main():
     p.add_argument("--cache", default="repro/data/cache")
     args = p.parse_args()
 
+    if os.path.exists(os.path.join(args.out, "manifest.json")):
+        print("manifest.json exists; skipping sampling.")
+        return
+
     content = sample_coco(args.n_content, args.seed, os.path.join(args.out, "content"), args.cache)
     style = sample_wikiart(args.n_style, args.seed, os.path.join(args.out, "style"))
 
