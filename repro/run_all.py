@@ -18,6 +18,8 @@ def main():
         run([f"{HERE}/run_ablation.py", "--data", data, "--out", runs, "--seed", seed])
     run([f"{HERE}/run_ablation.py", "--data", data, "--out", runs, "--seed", "1234",
          "--phase", "sample", "--configs", "fm_paper"])
+    run([f"{HERE}/run_ablation.py", "--data", data, "--out", runs, "--seed", "1234",
+         "--phase", "sample", "--configs", "baseline_tile", "fm_tile", "fm_paper_tile"])
     run([f"{HERE}/eval.py", "--runs", runs, "--data", data])
     run([f"{HERE}/make_figures.py", "--runs", runs, "--data", data])
 

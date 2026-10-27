@@ -3,7 +3,7 @@ import argparse, csv, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVAL_DIR = os.path.join(ROOT, "evaluation")
-CONFIGS = ["baseline", "fm", "ng", "full","fm_paper"]
+CONFIGS = ["baseline", "fm", "ng", "full", "fm_paper", "baseline_tile", "fm_tile", "fm_paper_tile"]
 PAIR_RE = re.compile(r"^(c\d+)_(s\d+)\.png$")
 
 
@@ -54,17 +54,24 @@ def main():
     p.add_argument("--data", required=True, help="folder with content/ and style/")
     p.add_argument("--out", default=os.path.join(ROOT, "results", "metrics.csv"))
     p.add_argument("--work", default="/content/eval_tmp")
+    p.add_argument("--redo", action="store_true", help="re-evaluate sets already in the output CSV")
     args = p.parse_args()
 
     seeds = sorted(d for d in os.listdir(args.runs) if d.startswith("seed"))
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
 
 
+    # keep rows already in the CSV, so only new image sets are evaluated (eval is deterministic)
     rows = []
+    if os.path.exists(args.out) and not args.redo:
+        with open(args.out) as f:
+            rows = list(csv.DictReader(f))
+    done = {(r["seed"], r["config"]) for r in rows}
+
     for seed in seeds:
         for config in CONFIGS:
             img_dir = os.path.join(args.runs, seed, "images", config)
-            if not os.path.isdir(img_dir):
+            if not os.path.isdir(img_dir) or (seed[4:], config) in done:
                 continue
             n = build_eval_folders(img_dir, args.data, args.work)
             print(f"Evaluating {seed} / {config} on {n} images...", flush=True)

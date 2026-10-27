@@ -4,7 +4,9 @@ from collections import defaultdict
 from PIL import Image, ImageDraw
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ORDER = ["baseline", "fm", "ng", "full", "fm_paper"]
+ORDER = ["baseline", "fm", "ng", "full", "fm_paper", "baseline_tile", "fm_tile", "fm_paper_tile"]
+GRID_COLS = ["baseline", "fm", "ng", "full", "fm_paper"]                  # main grid
+TILE_COLS = ["baseline", "baseline_tile", "fm_tile", "fm_paper_tile"]     # tile-only grid
 PAPER = {  # Table 2 of the paper: ArtFID, FID, LPIPS
     "baseline": (26.683, 16.205, 0.5509),
     "fm":       (24.112, 15.103, 0.4973),
@@ -44,8 +46,8 @@ def make_table(by_cfg, out_path):
 
 GRID_PAIRS = ["c00_s00", "c01_s01","c02_s02", "c03_s03"]   # diagonal pairs chosen
 
-def make_grid(runs, data, seed, out_path, size=256):
-    cols = ["content", "style"] + [c for c in ORDER if os.path.isdir(os.path.join(runs, f"seed{seed}", "images", c))]
+def make_grid(runs, data, seed, out_path, configs, size=256):
+    cols = ["content", "style"] + [c for c in configs if os.path.isdir(os.path.join(runs, f"seed{seed}", "images", c))]
     header = 28
     grid = Image.new("RGB", (size * len(cols), header + size * len(GRID_PAIRS)), "white")
     draw = ImageDraw.Draw(grid)
@@ -78,7 +80,9 @@ def main():
 
     os.makedirs(args.out, exist_ok=True)
     make_table(load_metrics(args.metrics), os.path.join(args.out, "table2.tex"))
-    make_grid(args.runs, args.data, args.seed, os.path.join(args.out, "qualitative_grid.png"))
+    make_grid(args.runs, args.data, args.seed, os.path.join(args.out, "qualitative_grid.png"), GRID_COLS)
+    if os.path.isdir(os.path.join(args.runs, f"seed{args.seed}", "images", "baseline_tile")):
+        make_grid(args.runs, args.data, args.seed, os.path.join(args.out, "qualitative_grid_tile.png"), TILE_COLS)
 
 if __name__ == "__main__":
     main()

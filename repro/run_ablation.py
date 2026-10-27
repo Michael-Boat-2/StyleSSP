@@ -13,7 +13,16 @@ CONFIGS = {
     "ng":       {"ng": True,  "fm": False},
     "full":     {"ng": True,  "fm": True},
     "fm_paper": {"ng": False, "fm": "paper"},   # paper-faithful FM (repro/fm_paper.py)
+    # tile-only ControlNet, as described in the paper (the code's default is tile + canny)
+    "baseline_tile":  {"ng": False, "fm": False,   "control": "tile"},
+    "fm_tile":        {"ng": False, "fm": True,    "control": "tile"},
+    "fm_paper_tile":  {"ng": False, "fm": "paper", "control": "tile"},
 }
+
+# ControlNet scales [tile, canny]. The authors' "tile_canny" setting uses [0.25, 0.40]; their "tile"
+# branch in infer_style.py uses the tile ControlNet alone at 0.25. Setting the canny scale to 0
+# multiplies its residuals by zero, so "tile" here is the same as their tile-only branch.
+CONTROL_SCALES = {"tile_canny": [0.25, 0.40], "tile": [0.25, 0.0]}
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -200,7 +209,7 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
                 prompt=saved["prompt"], negative_prompt=neg_prompt,
                 num_inference_steps=50, eta=1.0,
                 mask_image=full_mask, image=content,
-                control_image=[content, canny], controlnet_conditioning_scale=[0.25, 0.40],
+                control_image=[content, canny], controlnet_conditioning_scale=CONTROL_SCALES[sw.get("control", "tile_canny")],
                 ip_adapter_image=style, latents=start,
                 guidance_scale=cfg.guidance_scale, npi_interp=0.5,
                 generator=torch.Generator(device="cpu").manual_seed(args.seed),
@@ -210,7 +219,7 @@ def phase_sample(args, pairs, lat_dir, img_dir, log_path):
 
 
     del pipe, controlnet, image_encoder, vae
-    torch.cuda.empty_cache()\
+    torch.cuda.empty_cache()
 
 
 
@@ -224,7 +233,7 @@ def main():
     os.makedirs(img_dir, exist_ok=True)
     log_path = os.path.join(args.out, f"seed{args.seed}", "timings.csv")
 
-    print(f"{len(pairs)} pairs x {len(CONFIGS)} configs, seed {args.seed}")
+    print(f"{len(pairs)} pairs x {len(args.configs)} configs, seed {args.seed}")
     if args.phase in ("invert", "both"):
         phase_invert(args, pairs, lat_dir, log_path)
     if args.phase in ("sample", "both"):
