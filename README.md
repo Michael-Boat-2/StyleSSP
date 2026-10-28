@@ -17,8 +17,7 @@ each improve style transfer, and together give the best ArtFID / FID / LPIPS.
 Numbers: [`results/metrics.csv`](results/metrics.csv), table: [`results/table2.tex`](results/table2.tex),
 figure: [`results/qualitative_grid.png`](results/qualitative_grid.png).
 
-
-![png](results/readme_grid.jpg)
+another figure : [`results/qualitative_grid.png`](results/readme_grid.jpg)
 
 
 ## Reproduce everything
