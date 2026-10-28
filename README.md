@@ -17,7 +17,7 @@ each improve style transfer, and together give the best ArtFID / FID / LPIPS.
 Numbers: [`results/metrics.csv`](results/metrics.csv), table: [`results/table2.tex`](results/table2.tex),
 figure: [`results/qualitative_grid.png`](results/qualitative_grid.png).
 
-another figure : [`results/readme_grid.png`](results/readme_grid.jpg)
+
 
 
 ## Reproduce everything
@@ -51,7 +51,11 @@ ControlNets, a 0.2× content-latent mix at the sampling start, and more); see th
 
 ## Data
 `repro/data/manifest.json` lists every image used (COCO IDs and licences, WikiArt artist/style/genre).
-Images are not committed; `sample_data.py` re-downloads them.
+Images are not committed; `sample_data.py` re-downloads them.'
+
+
+## Another Figure
+![`results/readme_grid.png`](results/readme_grid.png)
 
 ## Credits
 Original code © 2025 Bytedance Ltd., Apache-2.0 (see [LICENCE.txt](LICENCE.txt)). Metric code from StyleID.
