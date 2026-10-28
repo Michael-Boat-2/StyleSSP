@@ -12,10 +12,14 @@ each improve style transfer, and together give the best ArtFID / FID / LPIPS.
 - NG has a negligible effect, consistent with the paper.
 - FM worsens LPIPS, FID and ArtFID in the released code, the opposite of the paper.
 - A paper-faithful FM (`repro/fm_paper.py`) removes ~60% of that harm but still does not beat the baseline.
-- <!-- tile-only result -->
+- With the paper's tile-only ControlNet (canny off), the baseline matches the paper's LPIPS (0.562 vs 0.551), but FM still worsens every metric.
 
 Numbers: [`results/metrics.csv`](results/metrics.csv), table: [`results/table2.tex`](results/table2.tex),
 figure: [`results/qualitative_grid.png`](results/qualitative_grid.png).
+
+
+![png](results/readme_grid.jpg)
+
 
 ## Reproduce everything
 Requires an NVIDIA GPU with ≥40 GB memory (we used a Colab A100 40 GB) and ~40 GB of disk for model weights.
